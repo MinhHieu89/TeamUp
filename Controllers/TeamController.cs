@@ -54,8 +54,11 @@ namespace TeamUp.Controllers
             return View("TeamForm", viewModel);
         }
 
-        public IActionResult ValidateTeamName(string name)
+        public IActionResult ValidateTeamName(string name, string initialName)
         {
+            if (name == initialName)
+                return Json(true);
+
             return Json(_unitOfWork.Teams.CheckTeamNameExists(name) ? $"Tên {name} đã có người khác chọn." : "true");
         }
 
