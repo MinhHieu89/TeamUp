@@ -1,0 +1,61 @@
+﻿@model TeamListViewModel
+
+@{
+    ViewData["Title"] = "Team list";
+}
+
+<h3>Danh sách các đội bóng</h3>
+
+<table id="teams" class="table table-hover">
+    <thead>
+    <tr>
+        <th>Logo</th>
+        <th>Tên đội</th>
+        <th>Thành phố</th>
+        <th>Quận</th>
+        <th>Số lượng thành viên</th>
+        <th>Ngày thành lập</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var team in Model.Teams)
+    {
+        <tr>
+            <td>
+                <div class="team-logo">
+                    <img src=@team.Logo alt="Team Logo"/>
+                </div>
+            </td>
+            <td>@team.Name</td>
+            <td>@team.City</td>
+            <td>@team.District</td>
+            <td>@team.Members.Count</td>
+            <td>@team.CreatedDate.ToString("d")</td>
+            <td>
+                <a class="js-join" data-team-id=@team.Id>Gia nhập</a> <text> | </text>
+                <a asp-controller="Team" asp-action="Detail" asp-route-id=@team.Id>Chi tiết</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-primary" asp-controller="Team" asp-action="Create">Tạo đội mới</a>
+</p>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#teams').on('click', '.js-join',
+                function () {
+                    var teamId = this.getAttribute('data-team-id');
+                    $.post('/api/teams/' + teamId,
+                        function (data) {
+                            console.log(data);
+                        });
+                });
+        });
+    </script>
+}

@@ -8,9 +8,10 @@ using TeamUp.Persistence;
 namespace TeamUp.Data.Migrations
 {
     [DbContext(typeof(TeamUpDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170708182216_ChangeDeleteBehaviorOfTeamTableToSetNull")]
+    partial class ChangeDeleteBehaviorOfTeamTableToSetNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -171,10 +172,9 @@ namespace TeamUp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DistrictId");
+                    b.HasAlternateKey("Name");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                    b.HasIndex("DistrictId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -244,9 +244,6 @@ namespace TeamUp.Data.Migrations
                         .IsUnique();
 
                     b.HasIndex("DistrictId");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Teams");
                 });

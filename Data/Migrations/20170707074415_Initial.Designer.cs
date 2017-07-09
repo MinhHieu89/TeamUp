@@ -8,9 +8,10 @@ using TeamUp.Persistence;
 namespace TeamUp.Data.Migrations
 {
     [DbContext(typeof(TeamUpDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170707074415_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -162,7 +163,7 @@ namespace TeamUp.Data.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int?>("TeamId");
+                    b.Property<int>("TeamId");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -171,10 +172,9 @@ namespace TeamUp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DistrictId");
+                    b.HasAlternateKey("Name");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                    b.HasIndex("DistrictId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -245,9 +245,6 @@ namespace TeamUp.Data.Migrations
 
                     b.HasIndex("DistrictId");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("Teams");
                 });
 
@@ -297,7 +294,7 @@ namespace TeamUp.Data.Migrations
                     b.HasOne("TeamUp.Models.Team")
                         .WithMany("Members")
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TeamUp.Models.District", b =>

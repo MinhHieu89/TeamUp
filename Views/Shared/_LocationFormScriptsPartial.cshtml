@@ -1,0 +1,20 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $('#CityId').change(function () {
+            $('#DistrictId option').remove();
+            $('#DistrictId').append('<option value>Chọn quận của bạn</option>');
+
+            var cityId = $('#CityId').val();
+            if (cityId) {
+                $.get('/api/cities/' + cityId, function (data) {
+                    $.each(data, function () {
+                        $('#DistrictId').append('<option value=' +
+                            this.id + '>' + this.name + '</option>');
+                    });
+                }).fail(function () {
+                    console.log('Error getting cities!');
+                });
+            }
+        });
+    });
+</script>

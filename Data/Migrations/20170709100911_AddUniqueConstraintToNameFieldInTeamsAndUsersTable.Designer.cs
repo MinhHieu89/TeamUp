@@ -8,9 +8,10 @@ using TeamUp.Persistence;
 namespace TeamUp.Data.Migrations
 {
     [DbContext(typeof(TeamUpDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170709100911_AddUniqueConstraintToNameFieldInTeamsAndUsersTable")]
+    partial class AddUniqueConstraintToNameFieldInTeamsAndUsersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

@@ -1,0 +1,10 @@
+D:\Projects\TeamUp\TeamUp\bin\Debug\netcoreapp1.1\TeamUp.deps.json
+D:\Projects\TeamUp\TeamUp\bin\Debug\netcoreapp1.1\TeamUp.runtimeconfig.json
+D:\Projects\TeamUp\TeamUp\bin\Debug\netcoreapp1.1\TeamUp.runtimeconfig.dev.json
+D:\Projects\TeamUp\TeamUp\bin\Debug\netcoreapp1.1\TeamUp.dll
+D:\Projects\TeamUp\TeamUp\bin\Debug\netcoreapp1.1\TeamUp.pdb
+D:\Projects\TeamUp\TeamUp\obj\Debug\netcoreapp1.1\TeamUp.csprojResolveAssemblyReference.cache
+D:\Projects\TeamUp\TeamUp\obj\Debug\netcoreapp1.1\TeamUp.AssemblyInfo.cs
+D:\Projects\TeamUp\TeamUp\obj\Debug\netcoreapp1.1\TeamUp.dll
+D:\Projects\TeamUp\TeamUp\obj\Debug\netcoreapp1.1\TeamUp.pdb
+D:\Projects\TeamUp\TeamUp\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
