@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using TeamUp.Controllers.Resources;
-using TeamUp.Models;
-using TeamUp.Models.ViewModels;
+using TeamUp.Core.Dtos;
+using TeamUp.Core.Models;
+using TeamUp.Core.ViewModels;
 
 namespace TeamUp.Mapping
 {
@@ -10,8 +10,8 @@ namespace TeamUp.Mapping
         public MappingProfile()
         {
             // From Domain to Api/ViewModel
-            CreateMap<City, CityResource>();
-            CreateMap<District, DistrictResource>();
+            CreateMap<City, CityDto>();
+            CreateMap<District, DistrictDto>();
             CreateMap<ApplicationUser, UserViewModel>()
                 .ForMember(uv => uv.HasTeam, opts => opts.MapFrom(u => u.TeamId.HasValue));
             CreateMap<Team, TeamDetailViewModel>()

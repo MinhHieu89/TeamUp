@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using TeamUp.Models;
+using TeamUp.Core;
+using TeamUp.Core.Repositories;
 using TeamUp.Persistence.Repositories;
 
 namespace TeamUp.Persistence

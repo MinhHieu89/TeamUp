@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TeamUp.Models;
+using TeamUp.Core.Models;
+using TeamUp.Core.Repositories;
 
 namespace TeamUp.Persistence.Repositories
 {

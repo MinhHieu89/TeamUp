@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using TeamUp.Models;
-using TeamUp.Models.AccountViewModels;
+using TeamUp.Core.Models;
+using TeamUp.Core.ViewModels;
 using TeamUp.Services;
 
 namespace TeamUp.Controllers

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using TeamUp.Controllers.Resources;
-using TeamUp.Models;
+using TeamUp.Core;
+using TeamUp.Core.Dtos;
+using TeamUp.Core.Models;
 
 namespace TeamUp.Controllers.Api
 {
@@ -20,18 +21,18 @@ namespace TeamUp.Controllers.Api
 
         // GET: /api/cities
         [HttpGet]
-        public IEnumerable<CityResource> GetCities()
+        public IEnumerable<CityDto> GetCities()
         {
             var cities = _unitOfWork.Locations.GetCities();
-            return _mapper.Map<IEnumerable<City>, IEnumerable<CityResource>>(cities);
+            return _mapper.Map<IEnumerable<City>, IEnumerable<CityDto>>(cities);
         }
 
         // GET: /api/cities/1
         [HttpGet("{cityId}")]
-        public IEnumerable<DistrictResource> GetDistricts(int cityId)
+        public IEnumerable<DistrictDto> GetDistricts(int cityId)
         {
             var districts = _unitOfWork.Locations.GetDistricts(cityId);
-            return _mapper.Map<IEnumerable<District>, IEnumerable<DistrictResource>>(districts);
+            return _mapper.Map<IEnumerable<District>, IEnumerable<DistrictDto>>(districts);
         }
     }
 }

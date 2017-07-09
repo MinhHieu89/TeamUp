@@ -4,8 +4,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TeamUp.Models;
-using TeamUp.Models.ViewModels;
+using TeamUp.Core;
+using TeamUp.Core.Models;
+using TeamUp.Core.ViewModels;
 
 namespace TeamUp.Controllers
 {

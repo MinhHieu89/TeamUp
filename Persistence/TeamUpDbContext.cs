@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using TeamUp.Models;
+using TeamUp.Core.Models;
 
 namespace TeamUp.Persistence
 {

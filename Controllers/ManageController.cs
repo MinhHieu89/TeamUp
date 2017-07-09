@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using TeamUp.Models;
-using TeamUp.Models.ManageViewModels;
+using TeamUp.Core.Models;
+using TeamUp.Core.ViewModels;
 using TeamUp.Services;
 
 namespace TeamUp.Controllers

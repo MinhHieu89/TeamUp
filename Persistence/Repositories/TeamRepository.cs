@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TeamUp.Models;
+using TeamUp.Core.Models;
+using TeamUp.Core.Repositories;
 
 namespace TeamUp.Persistence.Repositories
 {
