@@ -7,6 +7,7 @@ namespace TeamUp.Core
     {
         ITeamRepository Teams { get; }
         ILocationRepository Locations { get; }
+        IJoinRequestRepository JoinRequests { get; }
         Task CompleteAsync();
     }
 }

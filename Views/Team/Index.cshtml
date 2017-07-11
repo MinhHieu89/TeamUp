@@ -13,8 +13,8 @@
         <th>Tên đội</th>
         <th>Thành phố</th>
         <th>Quận</th>
-        <th>Số lượng thành viên</th>
-        <th>Ngày thành lập</th>
+        <th>Thành viên</th>
+        <th>Thành lập</th>
         <th></th>
     </tr>
     </thead>
@@ -51,9 +51,12 @@
             $('#teams').on('click', '.js-join',
                 function () {
                     var teamId = this.getAttribute('data-team-id');
-                    $.post('/api/teams/' + teamId,
-                        function (data) {
-                            console.log(data);
+                    $.post('/request/join', { TeamId: teamId })
+                        .done(function() {
+                            alert('Yêu cầu đã được gửi thành công.');
+                        })
+                        .fail(function (err) {
+                            alert(err.responseText);
                         });
                 });
         });

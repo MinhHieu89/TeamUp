@@ -10,6 +10,7 @@ namespace TeamUp.Persistence
         public DbSet<Team> Teams { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<District> Districts { get; set; }
+        public DbSet<JoinRequest> JoinRequests { get; set; }
 
         public TeamUpDbContext(DbContextOptions<TeamUpDbContext> options)
             : base(options)
@@ -38,6 +39,9 @@ namespace TeamUp.Persistence
             builder.Entity<ApplicationUser>()
                 .HasIndex(u => u.Name)
                 .IsUnique();
+
+            builder.Entity<JoinRequest>()
+                .HasKey(jr => new {jr.UserId, jr.TeamId, jr.CreatedTime});
 
         }
     }

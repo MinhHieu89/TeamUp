@@ -39,6 +39,14 @@ namespace TeamUp.Persistence.Repositories
                 .SingleOrDefaultAsync(t => t.Id == id);
         }
 
+        public async Task<Team> GetTeamWithRequests(int id)
+        {
+            return await _context.Teams
+                .Include(t => t.JoinRequests)
+                .SingleOrDefaultAsync(t => t.Id == id);
+
+        }
+
         public async Task AddAsync(Team team)
         {
             await _context.Teams.AddAsync(team);

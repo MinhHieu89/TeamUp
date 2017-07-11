@@ -33,7 +33,7 @@ namespace TeamUp.Controllers
 
             var viewModel = new TeamListViewModel
             {
-                Teams = _mapper.Map<IEnumerable<Team>, IEnumerable<TeamDetailViewModel>>(teams),
+                Teams = _mapper.Map<IEnumerable<Team>, IEnumerable<TeamViewModel>>(teams),
             };
 
             return View(viewModel);
@@ -83,7 +83,9 @@ namespace TeamUp.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             var team = await _unitOfWork.Teams.GetTeam(id);
-            var viewModel = _mapper.Map<Team, TeamDetailViewModel>(team);
+            var viewModel = _mapper.Map<Team, TeamViewModel>(team);
+            var requests = await _unitOfWork.JoinRequests.GetTeamRequestsAsync(id);
+            viewModel.JoinRequests = _mapper.Map<IEnumerable<JoinRequest>, IEnumerable<JoinRequestViewModel>>(requests);
 
             return View(viewModel);
         }

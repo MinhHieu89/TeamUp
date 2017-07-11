@@ -26,9 +26,12 @@ namespace TeamUp.Core.Models
 
         public ICollection<ApplicationUser> Members { get; }
 
+        public ICollection<JoinRequest> JoinRequests { get; }
+
         private Team()
         {
             Members = new Collection<ApplicationUser>();
+            JoinRequests = new Collection<JoinRequest>();
         }
 
         public Team(ApplicationUser user) : this()
@@ -43,6 +46,5 @@ namespace TeamUp.Core.Models
         {
             Members.Add(user);
         }
-
     }
 }

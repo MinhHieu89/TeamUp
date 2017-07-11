@@ -8,6 +8,7 @@ namespace TeamUp.Core.Repositories
     {
         Task<IEnumerable<Team>> GetTeams();
         Task<Team> GetTeam(int id, bool loadRelated = true);
+        Task<Team> GetTeamWithRequests(int id);
         Task AddAsync(Team team);
         void Delete(Team team);
         bool CheckTeamNameExists(string name);

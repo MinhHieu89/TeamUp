@@ -11,11 +11,13 @@ namespace TeamUp.Persistence
 
         public ITeamRepository Teams { get; private set; }
         public ILocationRepository Locations { get; private set; }
+        public IJoinRequestRepository JoinRequests { get; private set; }
 
         public UnitOfWork(TeamUpDbContext context)
         {
             Teams = new TeamRepository(context);
             Locations = new LocationRepository(context);
+            JoinRequests = new JoinRequestRepository(context);
             _context = context;
         }
 

@@ -9,9 +9,10 @@ using TeamUp.Core.Enums;
 namespace TeamUp.Persistence.Migrations
 {
     [DbContext(typeof(TeamUpDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170710031336_AddJoinRequestsTable")]
+    partial class AddJoinRequestsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -231,7 +232,7 @@ namespace TeamUp.Persistence.Migrations
 
                     b.Property<int>("Status");
 
-                    b.HasKey("UserId", "TeamId", "CreatedTime");
+                    b.HasKey("UserId", "TeamId");
 
                     b.HasIndex("TeamId");
 
@@ -328,14 +329,9 @@ namespace TeamUp.Persistence.Migrations
 
             modelBuilder.Entity("TeamUp.Core.Models.JoinRequest", b =>
                 {
-                    b.HasOne("TeamUp.Core.Models.Team", "Team")
+                    b.HasOne("TeamUp.Core.Models.Team")
                         .WithMany("JoinRequests")
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TeamUp.Core.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
