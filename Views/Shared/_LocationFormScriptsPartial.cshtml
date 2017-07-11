@@ -11,8 +11,8 @@
                         $('#DistrictId').append('<option value=' +
                             this.id + '>' + this.name + '</option>');
                     });
-                }).fail(function () {
-                    console.log('Error getting cities!');
+                }).fail(function (err) {
+                    swal(err.responseText, null, 'error');
                 });
             }
         });

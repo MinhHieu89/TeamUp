@@ -52,11 +52,11 @@
                 function () {
                     var teamId = this.getAttribute('data-team-id');
                     $.post('/request/join', { TeamId: teamId })
-                        .done(function() {
-                            alert('Yêu cầu đã được gửi thành công.');
+                        .done(function () {
+                            swal('Thành công!', 'Yêu cầu đã được gửi', 'success');
                         })
                         .fail(function (err) {
-                            alert(err.responseText);
+                            swal(err.responseText, null, 'error');
                         });
                 });
         });

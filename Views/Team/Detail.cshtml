@@ -51,7 +51,7 @@
                     <td>@request.Status</td>
                     <td>
                         <button class="btn btn-sm btn-primary js-approve" data-user-id="@request.UserId" data-team-id="@Model.Id">Đồng ý</button>
-                        <button class="btn btn-sm btn-danger js-decline" data-user-id="@request.UserId" data-team-id="@Model.Id">Từ chối</button>
+                        <button class="btn btn-sm btn-danger js-reject" data-user-id="@request.UserId" data-team-id="@Model.Id">Từ chối</button>
                     </td>
                 </tr>    
             }
@@ -72,15 +72,32 @@
             $('.js-team-delete').on('click',
                 function () {
                     var button = this;
-                    if (confirm('Bạn có chắc muốn giải thể đội bóng không?')) {
-                        $.post('/team/delete/' + $(button).attr('data-team-id'))
-                            .done(function () {
-                                window.location.replace('/team');
-                            })
-                            .fail(function (err) {
-                                alert(err);
-                            });
-                    }
+                    swal({
+                            title: "Bạn muốn giải thể đội bóng?",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Chắc chắn",
+                            closeOnConfirm: false
+                        },
+                        function () {
+                            $.post('/team/delete/' + $(button).attr('data-team-id'))
+                                .done(function () {
+                                        swal({
+                                            title: "Thành công",
+                                            text: "Dữ liệu đội bóng đã bị xóa",
+                                            type: "success",
+                                            showConfirmButton: false,
+                                            timer: 2000
+                                    },
+                                        function(){
+                                            window.location.replace('/team');
+                                        });
+                                })
+                                .fail(function (err) {
+                                    swal(err.responseText, null, 'error');
+                                });
+                        });
                 });
 
             $('.js-approve').on('click', function (e) {
@@ -92,12 +109,12 @@
                         });
                         $('.list-group-item > ol').append('<li>' + username + '</li>');
                     })
-                    .fail(function() {
-                        alert('Something wrong.');
+                    .fail(function (err) {
+                        swal(err.responseText, null, 'error');
                     });
             });
 
-            $('.js-decline').on('click', function (e) {
+            $('.js-reject').on('click', function (e) {
                 var button = $(e.target);
                 $.post('/request/reject', { UserId: button.attr('data-user-id'), TeamId: button.attr('data-team-id') })
                     .done(function() {
@@ -106,7 +123,7 @@
                         });
                     })
                     .fail(function(err) {
-                        alert(err.responseText);
+                        swal(err.responseText, null, 'error');
                 });
             });
         });
