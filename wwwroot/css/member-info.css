@@ -1,0 +1,31 @@
+﻿.profile-grid-left {
+	max-width: 25%;
+	min-width: 150px;
+	float: left;
+}
+
+.profile-grid-right {
+	max-width: 80%;
+	float: left;
+	padding-left: 20px;
+}
+
+.profile-grid-right p {
+	margin-top: 10px;
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.label-md {
+	font-size: 16px;
+	padding: 0.3em 0.6em;
+}
+
+.member-info__detail .table {
+	font-size: 16px;
+	margin-top: 0;
+}
+
+.member-info__profile {
+	margin-bottom: 0;
+}

@@ -1,0 +1,99 @@
+﻿@model MemberEditViewModel
+@{
+    ViewData["Title"] = "Cập nhật thông tin";
+}
+
+<div class="card grouping">
+    <form asp-controller="Members" asp-action="Edit" method="post" class="form-horizontal">
+        <h4>Cập nhật thông tin</h4>
+        <hr />
+        <div class="form-group">
+            <label asp-for="Avatar" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Avatar" class="form-control" />
+                <span asp-validation-for="Avatar" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CityId" class="col-md-2 control-label">Thành phố</label>
+            <div class="col-md-10">
+                <select asp-for="CityId" asp-items="@Model.Cities" class="form-control">
+                    <option value="">Chọn thành phố của bạn</option>
+                </select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DistrictId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="DistrictId" asp-items="@Model.Districts" class="form-control">
+                    <option value="">Chọn quận của bạn</option>
+                </select>
+                <span asp-validation-for="DistrictId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="StrongFoot" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <label class="radio-inline"><input asp-for="StrongFoot" type="radio" value="false">Trái</label>
+                <label class="radio-inline"><input asp-for="StrongFoot" type="radio" value="true">Phải</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Positions" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                @for (var i = 0; i < Model.Positions.Count; i++)
+                {
+                    <label asp-for="@Model.Positions[i].Selected" class="checkbox-inline">
+                        <input type="checkbox" asp-for="@Model.Positions[i].Selected">@Model.Positions[i].Name
+                        <input type="hidden" asp-for="@Model.Positions[i].Id">
+                        <input type="hidden" asp-for="@Model.Positions[i].Name">
+                    </label>
+                }
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="Height" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Height" class="form-control" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="BirthDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="BirthDate" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_LocationFormScriptsPartial"); }
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $.datepicker.setDefaults($.datepicker.regional["ar"]);
+            $('#BirthDate').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0"
+            });
+        })
+    </script>
+}

@@ -22,7 +22,7 @@ namespace TeamUp.Persistence.Repositories
         {
             return await _context.JoinRequests
                 .Where(r => r.UserId == userId && r.Status == RequestStatus.Pending)
-                .OrderBy(r => r.CreatedTime)
+                .OrderByDescending(r => r.CreatedTime)
                 .ToListAsync();
         }
 

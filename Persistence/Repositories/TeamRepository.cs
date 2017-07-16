@@ -26,9 +26,9 @@ namespace TeamUp.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Team> GetTeam(int id, bool loadIncluded = true)
+        public async Task<Team> GetTeam(int id, bool loadRelated = true)
         {
-            if (!loadIncluded)
+            if (!loadRelated)
                 return await _context.Teams.FindAsync(id);
 
             return await _context.Teams

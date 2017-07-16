@@ -1,0 +1,55 @@
+﻿@model TeamListViewModel
+
+@{
+    ViewData["Title"] = "Team list";
+}
+
+<div class="card grouping">
+    <h4>Danh sách các đội bóng</h4>
+    <hr />
+    <table id="teams" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Logo</th>
+                <th>Tên đội</th>
+                <th>Thành phố</th>
+                <th>Quận</th>
+                <th>Thành viên</th>
+                <th>Thành lập</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var team in Model.Teams)
+            {
+                <tr>
+                    <td>
+                        <div class="img-placeholder">
+                            <img src=@team.Logo alt="Team Logo" />
+                        </div>
+                    </td>
+                    <td>@team.Name</td>
+                    <td>@team.City</td>
+                    <td>@team.District</td>
+                    <td>@team.Members.Count</td>
+                    <td>@team.CreatedDate.ToString("d")</td>
+                    <td>
+                        <a class="js-join" data-team-id=@team.Id>Gia nhập</a> <text> | </text>
+                        <a asp-controller="Teams" asp-action="Info" asp-route-id=@team.Id>Chi tiết</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        <a class="btn btn-primary" asp-controller="Teams" asp-action="Create">Tạo đội mới</a>
+    </p>
+
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            TeamsController.init('#teams');
+        });
+    </script>
+}

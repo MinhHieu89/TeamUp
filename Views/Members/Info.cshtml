@@ -1,0 +1,96 @@
+﻿@using TeamUp.Core.Enums
+@model MemberInfoViewModel
+
+<div class="card grouping">
+    <h4>Thông tin</h4>
+    <hr/>
+    <div id="member-info">
+        <div class="member-info__profile well grouping">
+            <div class="profile-grid-left">
+                <div class="profile-picture">
+                    <img src="@Model.Avatar" alt="Profile picture"/>
+                </div>
+            </div>
+            <div class="profile-grid-right">
+                <h1>@Model.Name</h1>
+                <div class="positions">
+                    @foreach (var position in @Model.Positions)
+                    {
+                        <span class="label label-primary label-md">@position</span>
+                    }
+                </div>
+                <p>@Model.StrongFoot</p>
+            </div>
+        </div>
+        <div class="member-info__detail">
+            <table class="table">
+                <tr>
+                    <td>Địa chỉ</td>
+                    <td>@Model.GetLocation()</td>
+                </tr>
+                <tr>
+                    <td>Đội bóng</td>
+                    @if (@Model.Team != null)
+                    {
+                        <td><a asp-controller="Teams" asp-action="Info" asp-route-id=@Model.Team.Id>@Model.Team.Name</a></td>
+                    }
+                    else
+                    {
+                        <td>Không có</td>
+                    }
+                </tr>
+                <tr>
+                    <td>Tuổi</td>
+                    <td>@Model.Age</td>
+                </tr>
+                <tr>
+                    <td>Chiều cao</td>
+                    <td>@Model.Height (cm)</td>
+                </tr>
+                <tr>
+                    <td>Số điện thoại</td>
+                    <td>@Model.Phone</td>
+                </tr>
+            </table>
+            <button class="btn btn-primary">Mời vào đội</button>
+            <a asp-controller="Members" asp-action="Edit" class="btn btn-primary">Sửa thông tin</a>
+        </div>
+    </div>
+</div>
+<div class="card grouping">
+    <h4>Yêu cầu gia nhập</h4>
+    <hr />
+    <table id="join-requests" class="table">
+        <thead>
+        <tr>
+            <th>Ngày</th>
+            <th>Đội bóng</th>
+            <th>Trạng thái</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var request in Model.JoinRequests)
+        {
+            <tr>
+                <td>@request.CreatedTime.ToString("dd/MM/yyyy")</td>
+                <td>@request.TeamName</td>
+                <td>@request.Status</td>
+                <td>
+                    @if (request.Status == RequestStatus.Pending)
+                    {
+                        <button class="btn btn-sm btn-primary js-cancel" data-team-id="@request.TeamId">Hủy bỏ</button>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+        </table>
+</div>
+@section Scripts {
+    <script>
+        $(function() {
+            MemberInfoController.init("#join-requests");
+        });
+    </script>
+}

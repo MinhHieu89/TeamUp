@@ -12,7 +12,7 @@ namespace TeamUp.Core.ViewModels
 
         [Display(Name = "Tên đội")]
         [Required(ErrorMessage = "Hãy đặt tên cho đội của bạn")]
-        [Remote("ValidateTeamName", "Team")]
+        [Remote("ValidateTeamName", "Teams")]
         public string Name { get; set; }
 
         [Display(Name = "Thành phố")]

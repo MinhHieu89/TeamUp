@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using TeamUp.Persistence;
-using TeamUp.Core.Enums;
 
 namespace TeamUp.Persistence.Migrations
 {
@@ -131,15 +130,22 @@ namespace TeamUp.Persistence.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("Avatar");
+
+                    b.Property<DateTime?>("BirthDate");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<int?>("DistrictId");
+                    b.Property<int>("DistrictId");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("Height")
+                        .HasMaxLength(3);
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -157,11 +163,16 @@ namespace TeamUp.Persistence.Migrations
 
                     b.Property<string>("PasswordHash");
 
+                    b.Property<string>("Phone")
+                        .HasMaxLength(20);
+
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<bool?>("StrongFoot");
 
                     b.Property<int?>("TeamId");
 
@@ -238,6 +249,18 @@ namespace TeamUp.Persistence.Migrations
                     b.ToTable("JoinRequests");
                 });
 
+            modelBuilder.Entity("TeamUp.Core.Models.Position", b =>
+                {
+                    b.Property<byte>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Positions");
+                });
+
             modelBuilder.Entity("TeamUp.Core.Models.Team", b =>
                 {
                     b.Property<int>("Id")
@@ -267,6 +290,19 @@ namespace TeamUp.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("TeamUp.Core.Models.UserPosition", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<byte>("PositionId");
+
+                    b.HasKey("UserId", "PositionId");
+
+                    b.HasIndex("PositionId");
+
+                    b.ToTable("UserPositions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -308,7 +344,7 @@ namespace TeamUp.Persistence.Migrations
 
             modelBuilder.Entity("TeamUp.Core.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("TeamUp.Core.Models.District")
+                    b.HasOne("TeamUp.Core.Models.District", "District")
                         .WithMany("Users")
                         .HasForeignKey("DistrictId");
 
@@ -348,6 +384,19 @@ namespace TeamUp.Persistence.Migrations
                     b.HasOne("TeamUp.Core.Models.District", "District")
                         .WithMany()
                         .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TeamUp.Core.Models.UserPosition", b =>
+                {
+                    b.HasOne("TeamUp.Core.Models.Position", "Position")
+                        .WithMany()
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TeamUp.Core.Models.ApplicationUser", "User")
+                        .WithMany("Positions")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

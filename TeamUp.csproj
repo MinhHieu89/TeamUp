@@ -13,6 +13,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\app\controllers\memberInfoController.js" />
+    <Content Include="wwwroot\app\controllers\teamInfoController.js" />
+    <Content Include="wwwroot\app\controllers\teamsController.js" />
+    <Content Include="wwwroot\app\services\memberService.js" />
+    <Content Include="wwwroot\app\services\requestService.js" />
+    <Content Include="wwwroot\app\services\teamService.js" />
+    <Content Include="wwwroot\css\member-info.css" />
+    <Content Include="wwwroot\images\avatars\noAvatar.jpg" />
+    <Content Include="wwwroot\images\avatars\noAvatar.png" />
+    <Content Include="wwwroot\lib\bootstrap-paper\bootstrap-paper.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.paper.css" />
   </ItemGroup>
   <ItemGroup>

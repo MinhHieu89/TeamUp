@@ -13,7 +13,7 @@
             <ul class="dropdown-menu">
                 @if (Model.TeamId.HasValue)
                 {
-                    <li><a asp-controller="Team" asp-action="Detail" asp-route-id="@Model.TeamId">Đội của tôi</a></li>
+                    <li><a asp-controller="Teams" asp-action="Info" asp-route-id="@Model.TeamId">Đội của tôi</a></li>
                 }
                 <li><a href="#">Thông tin tài khoản</a></li>
                 <li role="separator" class="divider"></li>

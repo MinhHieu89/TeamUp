@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TeamUp.Core;
 using TeamUp.Core.Models;
 using TeamUp.Core.ViewModels;
 using TeamUp.Services;
@@ -17,6 +18,7 @@ namespace TeamUp.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -25,6 +27,7 @@ namespace TeamUp.Controllers
         private readonly string _externalCookieScheme;
 
         public AccountController(
+            IUnitOfWork unitOfWork,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IOptions<IdentityCookieOptions> identityCookieOptions,
@@ -32,6 +35,7 @@ namespace TeamUp.Controllers
             ISmsSender smsSender,
             ILoggerFactory loggerFactory)
         {
+            _unitOfWork = unitOfWork;
             _userManager = userManager;
             _signInManager = signInManager;
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
@@ -98,9 +102,11 @@ namespace TeamUp.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            var viewModel = new RegisterViewModel();
+            viewModel.PopulateLocationList(_unitOfWork.Locations.GetCities());
+            return View(viewModel);
         }
-
+        
         //
         // POST: /Account/Register
         [HttpPost]
@@ -115,7 +121,8 @@ namespace TeamUp.Controllers
                 {
                     Name = model.Name,
                     UserName = model.Email,
-                    Email = model.Email
+                    Email = model.Email,
+                    DistrictId = model.DistrictId
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);

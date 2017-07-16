@@ -11,6 +11,8 @@ namespace TeamUp.Persistence
         public DbSet<City> Cities { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<JoinRequest> JoinRequests { get; set; }
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<UserPosition> UserPositions { get; set; }
 
         public TeamUpDbContext(DbContextOptions<TeamUpDbContext> options)
             : base(options)
@@ -23,12 +25,12 @@ namespace TeamUp.Persistence
 
             builder.Entity<Team>()
                 .HasMany(t => t.Members)
-                .WithOne()
+                .WithOne(m => m.Team)
                 .OnDelete(DeleteBehavior.SetNull);
 
             builder.Entity<Team>()
                 .HasOne(t => t.Captain)
-                .WithOne(t => t.Team)
+                .WithOne(t => t.TeamToManage)
                 .HasForeignKey<Team>(t => t.CaptainId)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -40,8 +42,17 @@ namespace TeamUp.Persistence
                 .HasIndex(u => u.Name)
                 .IsUnique();
 
+            builder.Entity<ApplicationUser>()
+                .HasOne(u => u.District)
+                .WithMany(d => d.Users)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
             builder.Entity<JoinRequest>()
                 .HasKey(jr => new {jr.UserId, jr.TeamId, jr.CreatedTime});
+
+            builder.Entity<UserPosition>()
+                .HasKey(up => new {up.UserId, up.PositionId});
 
         }
     }

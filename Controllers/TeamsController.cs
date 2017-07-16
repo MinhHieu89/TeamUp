@@ -10,15 +10,15 @@ using TeamUp.Core.ViewModels;
 
 namespace TeamUp.Controllers
 {
-    public class TeamController : Controller
+    public class TeamsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public TeamController(
-            IUnitOfWork unitOfWork, 
-            IMapper mapper, 
+        public TeamsController(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
             UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
@@ -33,7 +33,7 @@ namespace TeamUp.Controllers
 
             var viewModel = new TeamListViewModel
             {
-                Teams = _mapper.Map<IEnumerable<Team>, IEnumerable<TeamViewModel>>(teams),
+                Teams = _mapper.Map<IEnumerable<Team>, IEnumerable<TeamInfoViewModel>>(teams),
             };
 
             return View(viewModel);
@@ -80,10 +80,10 @@ namespace TeamUp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Detail(int id)
+        public async Task<IActionResult> Info(int id)
         {
             var team = await _unitOfWork.Teams.GetTeam(id);
-            var viewModel = _mapper.Map<Team, TeamViewModel>(team);
+            var viewModel = _mapper.Map<Team, TeamInfoViewModel>(team);
             var requests = await _unitOfWork.JoinRequests.GetTeamRequestsAsync(id);
             viewModel.JoinRequests = _mapper.Map<IEnumerable<JoinRequest>, IEnumerable<JoinRequestViewModel>>(requests);
 
@@ -101,7 +101,7 @@ namespace TeamUp.Controllers
             viewModel.PopulateLocationList(
                 _unitOfWork.Locations.GetCities(),
                 _unitOfWork.Locations.GetDistricts(team.District.CityId));
-            
+
 
             _mapper.Map(team, viewModel);
 
@@ -119,13 +119,13 @@ namespace TeamUp.Controllers
 
             await _unitOfWork.CompleteAsync();
 
-            return RedirectToAction("Detail", new { id = team.Id });
+            return RedirectToAction("Info", new { id = team.Id });
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var team = await _unitOfWork.Teams.GetTeam(id, loadRelated:false);
+            var team = await _unitOfWork.Teams.GetTeam(id, loadRelated: false);
 
             if (team == null)
                 return NotFound();

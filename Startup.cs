@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using TeamUp.Core;
 using TeamUp.Core.Models;
 using TeamUp.Core.Repositories;
+using TeamUp.Core.Services;
 using TeamUp.Persistence;
 using TeamUp.Persistence.Repositories;
 using TeamUp.Services;
@@ -39,9 +40,15 @@ namespace TeamUp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Register Repositories
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITeamRepository, TeamRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Register Services
+            services.AddTransient<IMemberService, MemberService>();
+
             services.AddAutoMapper();
 
             // Add framework services.

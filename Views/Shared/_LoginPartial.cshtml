@@ -19,7 +19,7 @@
                 <ul class="dropdown-menu">
                     @if (currentUser.TeamId.HasValue)
                     {
-                        <li><a asp-controller="Team" asp-action="Detail" asp-route-id="@currentUser.TeamId">Đội của tôi</a></li>
+                        <li><a asp-controller="Teams" asp-action="Info" asp-route-id="@currentUser.TeamId">Đội của tôi</a></li>
                     }
                     <li><a href="#">Thông tin tài khoản</a></li>
                     <li role="separator" class="divider"></li>

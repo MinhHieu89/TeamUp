@@ -1,0 +1,35 @@
+﻿@model MemberInfoViewModel
+
+<div class="sidebar info col-md-2">
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <div class="avatar">
+                <a href="/">
+                    <div class="avatar__image">
+                        <img src="@Model.Avatar" alt="My Avatar" />
+                    </div>
+                </a>
+                <h1 class="avatar__title">@Model.Name</h1>
+                <p class="avatar__subtitle">@Model.Team?.Name</p>
+            </div>
+
+            <nav id="main-nav">
+                <ul class="main-navigation">
+                    @if (Model.Team != null)
+                    {
+                        <li><a asp-controller="Teams" asp-action="Info" asp-route-id="@Model.Team.Id">Đội Bóng</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Teams" asp-action="Create" >Tạo Đội</a></li>
+                    }
+                    <li><a asp-controller="Members" asp-action="Info" asp-route-id="@Model.Id">Thông tin</a></li>
+                    <li><a asp-controller="Members" asp-action="Edit">Chỉnh sửa</a></li>
+                    <li><a href="#">Tin Nhắn</a></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Thoát</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+</div>

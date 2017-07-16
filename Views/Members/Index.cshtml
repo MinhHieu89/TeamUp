@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MemberInfoViewModel>
+<div class="card grouping">
+    <table id="members" class="table table-hover">
+        <thead>
+            <tr><th>Avatar</th><th>Tên</th><th>Thành phố</th><th>Quận</th><th>Đội bóng</th><th>Vị trí</th><th></th></tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="img-placeholder">
+                            <img src="@user.Avatar" alt="Avatar" />
+                        </div>
+                    </td>
+                    <td>@user.Name</td>
+                    <td>@user.City</td>
+                    <td>@user.District</td>
+                    @if (user.Team != null)
+                    {
+                        <td><a asp-controller="Teams" asp-action="Info" asp-route-id="@user.Team.Id">@user.Team.Name</a></td>
+
+                    }
+                    else
+                    {
+                        <td>Không có</td>
+
+                    }
+                    <td>@string.Join(", ", user.Positions)</td>
+                    <td>
+                        <a asp-controller="Members" asp-action="Info" asp-route-id="@user.Id">Chi tiết</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

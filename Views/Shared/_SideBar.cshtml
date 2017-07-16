@@ -1,0 +1,42 @@
+﻿@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
+
+<div class="sidebar info col-md-2">
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <div class="avatar">
+                <a href="/">
+                    <div class="avatar__image">
+                        <img src="~/images/avatars/noAvatar.png" alt="My Avatar"/>
+                    </div>
+                </a>
+                <h1 class="avatar__title">@user.Name</h1>
+                <p class="avatar__subtitle">@user.Team?.Name</p>
+            </div>
+
+            <nav id="main-nav">
+                <ul class="main-navigation">
+                    @if (user.TeamId.HasValue)
+                    {
+                        <li><a asp-controller="Teams" asp-action="Info" asp-route-id="@user.TeamId">Đội Bóng</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Teams" asp-action="Create" asp-route-id="@user.TeamId">Tạo Đội</a></li>
+                    }
+                    <li><a href="#">Yêu Cầu</a></li>
+                    <li><a asp-controller="Members" asp-action="Edit">Cá nhân</a></li>
+                    <li><a href="#">Tin Nhắn</a></li>
+                    <li><a href="#">Thoát</a></li>
+                </ul>
+            </nav>
+            <nav id="sub-nav">
+            </nav>
+        </header>
+    </div>
+
+</div>

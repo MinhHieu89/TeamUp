@@ -14,7 +14,7 @@ namespace TeamUp.Core.ViewModels
 
         [Required(ErrorMessage = "Hãy nhập tên đội bóng.")]
         [Display(Name = "Tên đội")]
-        [Remote("ValidateTeamName", "Team", AdditionalFields = "InitialName")]
+        [Remote("ValidateTeamName", "Teams", AdditionalFields = "InitialName")]
         public string Name { get; set; }
 
         public string InitialName { get; set; }

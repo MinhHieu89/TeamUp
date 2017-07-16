@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace TeamUp.Core.ViewModels
 {
-    public class TeamViewModel
+    public class TeamInfoViewModel
     {
         public int Id { get; set; }
         public UserViewModel Captain { get; set; }
@@ -17,7 +17,7 @@ namespace TeamUp.Core.ViewModels
 
         public ICollection<UserViewModel> Members { get; set; }
 
-        public TeamViewModel()
+        public TeamInfoViewModel()
         {
             Members = new Collection<UserViewModel>();
         }

@@ -1,0 +1,82 @@
+﻿@using System.Linq
+@model TeamInfoViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết đội bóng";
+}
+
+
+<div class="card grouping">
+
+
+    <div class="col-md-4">
+        <figure>
+            <img src=@Model.Logo alt="Team Logo" />
+            <figcaption>@Model.Name</figcaption>
+        </figure>
+    </div>
+    <div id="teamInfo" class="col-md-8">
+        <div class="list-group">
+            <a href="#" class="list-group-item">
+                <h5 class="list-group-item-heading">Đội trưởng</h5>
+                <p class="list-group-item-text">@Model.Captain.Name</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h5 class="list-group-item-heading">Thành phố</h5>
+                <p class="list-group-item-text">@Model.City</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h5 class="list-group-item-heading">Quận</h5>
+                <p class="list-group-item-text">@Model.District</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h5 class="list-group-item-heading">Ngày thành lập</h5>
+                <p class="list-group-item-text">@Model.CreatedDate.ToString("d")</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h5 class="list-group-item-heading">Thành viên</h5>
+                <ol>
+                    @foreach (var member in Model.Members)
+                    {
+                        <li>@member.Name</li>
+                    }
+                </ol>
+            </a>
+        </div>
+
+        @if (Model.JoinRequests.Any())
+        {
+            <h4>Thành viên xin gia nhập</h4>
+            <table class="table table-condensed">
+                @foreach (var request in @Model.JoinRequests)
+                {
+                    <tr>
+                        <td>@request.CreatedTime.ToString("d")</td>
+                        <td>@request.UserName</td>
+                        <td>@request.Status</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary js-approve" data-user-id="@request.UserId" data-team-id="@Model.Id">Đồng ý</button>
+                            <button class="btn btn-sm btn-danger js-reject" data-user-id="@request.UserId" data-team-id="@Model.Id">Từ chối</button>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        <a asp-controller="Teams" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Chỉnh sửa</a>
+        <button data-team-id="@Model.Id" class="btn btn-danger js-team-delete">Xóa</button>
+        <button class="btn btn-info js-leave">Rời đội</button>
+        <a asp-controller="Teams" asp-action="Index" class="btn btn-default">Quay lại</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            TeamInfoController.init("#teamInfo");
+        });
+    </script>
+}
+
+
+
