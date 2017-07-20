@@ -13,6 +13,7 @@ namespace TeamUp.Persistence
         public DbSet<JoinRequest> JoinRequests { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<UserPosition> UserPositions { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
         public TeamUpDbContext(DbContextOptions<TeamUpDbContext> options)
             : base(options)

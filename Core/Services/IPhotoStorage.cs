@@ -1,0 +1,10 @@
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+
+namespace TeamUp.Core.Services
+{
+    public interface IPhotoStorage
+    {
+        Task<string> StorePhoto(string uploadsFolderPath, IFormFile file);
+    }
+}

@@ -20,6 +20,7 @@ namespace TeamUp.Mapping
                     opts.MapFrom(u => u.Positions.Select(up => new PositionViewModel { Id = up.PositionId, Name = up.Position.Name, Selected = true })));
 
             CreateMap<ApplicationUser, MemberInfoViewModel>()
+                .ForMember(v => v.Avatar, opts => opts.MapFrom(u => u.Avatar == null ? "noAvatar.jpg" : u.Avatar.FileName))
                 .ForMember(v => v.Team,
                     opts => opts.MapFrom(u => u.TeamId.HasValue
                         ? new KeyValuePairViewModel { Id = u.TeamId.Value, Name = u.Team.Name }
@@ -40,6 +41,7 @@ namespace TeamUp.Mapping
             // From Api/ViewModel to Domain
             CreateMap<MemberEditViewModel, ApplicationUser>()
                 .ForMember(u => u.Positions, opts => opts.Ignore())
+                .ForMember(u => u.Avatar, opts => opts.Ignore())
                 .AfterMap((v, u) =>
                 {
                     var selectedPositions = v.Positions.Where(p => p.Selected).ToList();

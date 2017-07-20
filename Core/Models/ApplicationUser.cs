@@ -12,7 +12,7 @@ namespace TeamUp.Core.Models
         [MaxLength(100)]
         public string Name { get; set; }
 
-        public string Avatar { get; set; }
+        public Photo Avatar { get; set; }
 
         public int DistrictId { get; set; }
         public District District { get; set; }
@@ -46,7 +46,6 @@ namespace TeamUp.Core.Models
 
         public ApplicationUser()
         {
-            Avatar = "/images/avatars/noAvatar.jpg";
             Positions = new Collection<UserPosition>();
             JoinRequests = new Collection<JoinRequest>();
         }

@@ -9,6 +9,7 @@ namespace TeamUp.Persistence
     {
         private readonly TeamUpDbContext _context;
 
+        public IPhotoRepository Photos { get; private set; }
         public IPositionRepository Positions { get; private set; }
         public IUserRepository Users { get; private set; }
         public ITeamRepository Teams { get; private set; }
@@ -17,6 +18,7 @@ namespace TeamUp.Persistence
 
         public UnitOfWork(TeamUpDbContext context)
         {
+            Photos = new PhotoRepository(context);
             Positions = new PositionRepository(context);
             Users = new UserRepository(context);
             Teams = new TeamRepository(context);

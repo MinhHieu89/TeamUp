@@ -17,7 +17,8 @@ namespace TeamUp.Core.Models
         [MaxLength(100)]
         public string Name { get; set; }
 
-        public string Logo { get; set; }
+        public Photo Logo { get; set; }
+        public Photo Cover { get; set; }
 
         public int DistrictId { get; set; }
         public District District { get; set; }
@@ -36,7 +37,6 @@ namespace TeamUp.Core.Models
 
         public Team(ApplicationUser user) : this()
         {
-            Logo = "/images/logos/default-logo.jpg";
             CreatedDate = DateTime.Now;
             Captain = user;
             AddMember(user);

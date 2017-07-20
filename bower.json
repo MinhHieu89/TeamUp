@@ -3,8 +3,10 @@
   "private": true,
   "dependencies": {
     "bootstrap": "3.3.7",
+    "jcrop": "0.9.12",
     "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
-    "jquery-validation-unobtrusive": "3.2.6"
+    "jquery-validation-unobtrusive": "3.2.6",
+    "Croppie": "croppie#^2.5.0"
   }
 }

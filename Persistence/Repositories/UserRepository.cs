@@ -19,6 +19,7 @@ namespace TeamUp.Persistence.Repositories
         public async Task<IEnumerable<ApplicationUser>> GetUsers()
         {
             return await _context.Users
+                .Include(u => u.Avatar)
                 .Include(u => u.Team)
                 .Include(u => u.District)
                     .ThenInclude(d => d.City)
@@ -34,6 +35,7 @@ namespace TeamUp.Persistence.Repositories
                 return await _context.Users.FindAsync(id);
 
             return await _context.Users
+                .Include(u => u.Avatar)
                 .Include(u => u.Team)
                     .ThenInclude(t => t.Members)
                 .Include(u => u.District)

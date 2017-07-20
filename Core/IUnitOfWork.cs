@@ -5,6 +5,7 @@ namespace TeamUp.Core
 {
     public interface IUnitOfWork
     {
+        IPhotoRepository Photos { get; }
         IPositionRepository Positions { get; }
         IUserRepository Users { get; }
         ITeamRepository Teams { get; }

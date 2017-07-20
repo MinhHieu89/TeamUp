@@ -4,16 +4,30 @@
 }
 
 <div class="card grouping">
+    <h4>Thay đổi hình đại diện</h4>
+    <hr />
+    <div class="row">
+        <div id="avatar-upload" class="col-md-4">
+            <div class="image-viewport"></div>
+            <div class="upload-btn-group">
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Add files...</span>
+                    <input class="input-file" type="file" name="origin">
+                </span>
+                <button type="button" class="btn btn-primary start-button">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start upload</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card grouping">
     <form asp-controller="Members" asp-action="Edit" method="post" class="form-horizontal">
         <h4>Cập nhật thông tin</h4>
         <hr />
-        <div class="form-group">
-            <label asp-for="Avatar" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Avatar" class="form-control" />
-                <span asp-validation-for="Avatar" class="text-danger"></span>
-            </div>
-        </div>
         <div class="form-group">
             <label asp-for="CityId" class="col-md-2 control-label">Thành phố</label>
             <div class="col-md-10">
@@ -85,15 +99,24 @@
 @section Scripts {
     @{ await Html.RenderPartialAsync("_LocationFormScriptsPartial"); }
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    @{ await Html.RenderPartialAsync("_ImageUploadScriptsPartial"); }
     <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/lib/Croppie/croppie.js"></script>
+    
     <script>
-        $(function () {
+        $(function() {
             $.datepicker.setDefaults($.datepicker.regional["ar"]);
             $('#BirthDate').datepicker({
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "-100:+0"
             });
-        })
+
+            PhotosController.init("#avatar-upload",
+                {
+                    viewport: { width: 160, height: 160, type: "circle" },
+                    boundary: { width: 250, height: 250 }
+                });
+        });
     </script>
 }

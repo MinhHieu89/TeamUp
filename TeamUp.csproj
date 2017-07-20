@@ -14,16 +14,23 @@
 
   <ItemGroup>
     <Content Include="wwwroot\app\controllers\memberInfoController.js" />
+    <Content Include="wwwroot\app\controllers\photosController.js" />
+    <Content Include="wwwroot\app\controllers\photoUploadController" />
+    <Content Include="wwwroot\app\controllers\photoUploadController.js" />
     <Content Include="wwwroot\app\controllers\teamInfoController.js" />
     <Content Include="wwwroot\app\controllers\teamsController.js" />
-    <Content Include="wwwroot\app\services\memberService.js" />
+    <Content Include="wwwroot\app\services\photoService.js" />
     <Content Include="wwwroot\app\services\requestService.js" />
     <Content Include="wwwroot\app\services\teamService.js" />
+    <Content Include="wwwroot\css\image-upload.css" />
     <Content Include="wwwroot\css\member-info.css" />
     <Content Include="wwwroot\images\avatars\noAvatar.jpg" />
-    <Content Include="wwwroot\images\avatars\noAvatar.png" />
     <Content Include="wwwroot\lib\bootstrap-paper\bootstrap-paper.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.paper.css" />
+    <Content Include="wwwroot\uploads\36d9797f-b952-45ef-a4a6-af393d7be4cd.jpg" />
+    <Content Include="wwwroot\uploads\6e8326d5-2961-406e-a865-aebfc8d5ca51.png" />
+    <Content Include="wwwroot\uploads\de86eacb-20a8-4dd5-a50f-2eec3232933c.jpg" />
+    <Content Include="wwwroot\uploads\noAvatar.jpg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.1.1" />

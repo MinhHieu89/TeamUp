@@ -25,11 +25,14 @@ bin/
 Bin/
 obj/
 Obj/
+/obj/**
+/bin/**
 
 # Visual Studio 2015 cache/options directory
 .vs/
 /wwwroot/dist/**
 /wwwroot/lib/**
+/wwwroot/uploads/**
 /ClientApp/dist/**
 
 # Workaround for https://github.com/aspnet/JavaScriptServices/issues/235
