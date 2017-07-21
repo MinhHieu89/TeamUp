@@ -1,0 +1,116 @@
+﻿
+.form-content .positions {
+	max-width: 400px;
+}
+
+.form-content .positions > label {
+	margin-left: 0;
+	width: 18%;
+}
+
+.positions-view img {
+	max-height: 400px;
+}
+
+.positions-view {
+	position: relative;
+	display: inline-block;
+}
+
+	.positions-view .positions-item {
+		position: absolute;
+		height: 30px;
+		width: 30px;
+		text-align: center;
+		color: #000;
+		line-height: 30px;
+		background-color: #FFF;
+		-ms-border-radius: 50%;
+		border-radius: 50%;
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
+
+		.positions-view .positions-item:hover {
+			background-color: #e74c3c;
+			color: #FFF;
+			cursor: pointer;
+		}
+
+		.positions-view .positions-item.positions-item--selected {
+			background-color: #e74c3c;
+			color: #FFF;
+		}
+		
+
+
+.positions-view label[for^="Positions_0"].positions-item {
+		top: 88%;
+		left: 50%;
+		-ms-transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.positions-view label[for^="Positions_1"].positions-item {
+		top: 74%;
+		left: 50%;
+		-ms-transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.positions-view label[for^="Positions_2"].positions-item {
+		top: 70%;
+		left: 14%;
+		-ms-transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.positions-view label[for^="Positions_3"].positions-item {
+		top: 70%;
+		left: 86%;
+		-ms-transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.positions-view label[for^="Positions_4"].positions-item {
+		top: 60%;
+		left: 50%;
+		-ms-transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.positions-view label[for^="Positions_5"].positions-item {
+		top: 46%;
+		left: 50%;
+		-ms-transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.positions-view label[for^="Positions_6"].positions-item {
+		top: 46%;
+		left: 20%;
+		-ms-transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.positions-view label[for^="Positions_7"].positions-item {
+		top: 46%;
+		left: 80%;
+		-ms-transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.positions-view label[for^="Positions_8"].positions-item {
+		top: 28%;
+		left: 50%;
+		-ms-transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.positions-view label[for^="Positions_9"].positions-item {
+		top: 10%;
+		left: 50%;
+		-ms-transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
