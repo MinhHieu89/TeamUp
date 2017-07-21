@@ -24,6 +24,7 @@
     <Content Include="wwwroot\css\image-upload.css" />
     <Content Include="wwwroot\css\member-edit.css" />
     <Content Include="wwwroot\css\member-info.css" />
+    <Content Include="wwwroot\css\team-info.css" />
     <Content Include="wwwroot\lib\bootstrap-paper\bootstrap-paper.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.paper.css" />
     <Content Include="wwwroot\uploads\de86eacb-20a8-4dd5-a50f-2eec3232933c.jpg" />

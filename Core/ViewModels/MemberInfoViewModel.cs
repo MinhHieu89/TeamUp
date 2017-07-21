@@ -11,7 +11,7 @@ namespace TeamUp.Core.ViewModels
         public string District { get; set; }
         public KeyValuePairViewModel Team { get; set; }
         public IEnumerable<string> Positions { get; set; }
-        public string StrongFoot { get; set; }
+        public bool? StrongFoot { get; set; }
         public string Age { get; set; }
         public string Height { get; set; }
         public string Phone { get; set; }

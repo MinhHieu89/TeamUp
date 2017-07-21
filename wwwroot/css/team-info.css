@@ -1,0 +1,138 @@
+﻿.team-info {
+	max-width: 1024px;
+	margin-left: auto;
+	margin-right: auto;
+	-webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.team-info--banner {
+	max-width: 1024px;
+	max-height: 380px;
+	border-bottom: 5px solid #3498db;
+	margin-bottom: 0;
+}
+
+.team-info--content {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #f4f0f0;
+	border-bottom: 2px solid rgba(0,0,0, .3);
+}
+
+	.team-info--content:after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+
+.team-info--content__logo-block {
+	float: left;
+	overflow: hidden;
+	width: 200px;
+	height: 200px;
+	border: 7px solid #fff;
+	border-radius: 2px;
+	margin-left: 20px;
+	-webkit-box-shadow: 0 0 2px #000;
+	box-shadow: 0 0 2px #000;
+}
+
+.team-info--content ul {
+	margin: 0;
+	display: block;
+	top: 50%;
+	list-style: none;
+	float: left;
+	font-size: 1.8rem;
+}
+
+.team-info--content li {
+	line-height: 1em;
+	margin-bottom: 8px;
+}
+
+.team-info--content .team-name {
+	margin-top: 15px;
+	font-size: 3rem;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+.team-info--content .city {
+	color: #ff622c;
+	font-size: 2rem;
+}
+
+.team-info--content .district {
+	font-size: 1.6rem;
+}
+
+.team-info--content__btn-container {
+	top: 68%;
+	left: 26%;
+	position: absolute;
+}
+
+.team-info--memberlist {
+	position: relative;
+	padding: 30px;
+	margin: 0;
+	background-color: #e2e2e2;
+}
+
+	.team-info--memberlist h1 {
+		font-size: 3rem;
+		padding-left: 20px;
+		padding-bottom: 20px;
+		margin: 0;
+	}
+
+.team-info--memberlist__selection {
+	position: absolute;
+	top: 30px;
+	left: 29%;
+	z-index: 1000;
+}
+
+.row:after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+@media (min-width: 800px) {
+	.row .row__medium-4 {
+		float: left;
+		width: 33.332%;
+	}
+}
+
+.member-info {
+	margin-left: 50px;
+	margin-bottom: 20px;
+	background-color: #fff;
+	position: relative;
+	height: 100px;
+	-webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.member-info__avatar {
+	position: absolute;
+	left: -50px;
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	border-radius: 60px;
+	border: 4px solid #fff;
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.member-info ul {
+	list-style: none;
+	margin-left: 20px;
+	padding-top: 7px;
+	color: #000;
+}

@@ -2,48 +2,59 @@
 @model TeamInfoViewModel
 
 @{
-    ViewData["Title"] = "Chi tiết đội bóng";
+    ViewData["Title"] = "Thông tin đội";
 }
 
+<div class="card grouping">
+    <div class="team-info">
+        <div class="team-info--banner">
+            <img src="/uploads/noCover.jpg" alt="Team banner">
+        </div>
+        <div class="team-info--content">
+            <div class="team-info--content__logo-block">
+                <img src="/uploads/noLogo.jpg" alt="Team logo">
+            </div>
+            <ul>
+                <li class="team-name">@Model.Name</li>
+                <li class="city">@Model.City</li>
+                <li class="district">@Model.District</li>
+                <li class="created-date">Thành lập: @Model.CreatedDate.ToString("d")</li>
+                <li ><button data-team-id="@Model.Id" class="btn btn-warning js-join">Xin gia nhập</button></li>
+            </ul>
+        </div>
+        <div class="team-info--memberlist">
+            <h1>Thành viên (@Model.Members.Count)</h1>
+            <div class="row">
+                @foreach (var member in @Model.Members)
+                {
+                    <div class="col-md-4">
+                        <div class="member-info">
+                            <div class="member-info__avatar">
+                                <a asp-controller="Members" asp-action="Info" asp-route-id="@member.Id">
+                                    <img src="/uploads/@member.Avatar" alt="member avatar">
+                                </a>
+                            </div>
+                            <ul>
+                                <li>@member.Name</li>
+                                <li>
+                                    @foreach (var position in member.Positions)
+                                    {
+                                        <span class="label label-primary">@position</span>
+                                    }
+                                </li>
+                                <li>Tuổi: @member.Age</li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <div class="card grouping">
-
-
-    <div class="col-md-4">
-        <figure>
-            <img src=@Model.Logo alt="Team Logo" />
-            <figcaption>@Model.Name</figcaption>
-        </figure>
-    </div>
-    <div id="teamInfo" class="col-md-8">
-        <div class="list-group">
-            <a href="#" class="list-group-item">
-                <h5 class="list-group-item-heading">Đội trưởng</h5>
-                <p class="list-group-item-text">@Model.Captain.Name</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <h5 class="list-group-item-heading">Thành phố</h5>
-                <p class="list-group-item-text">@Model.City</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <h5 class="list-group-item-heading">Quận</h5>
-                <p class="list-group-item-text">@Model.District</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <h5 class="list-group-item-heading">Ngày thành lập</h5>
-                <p class="list-group-item-text">@Model.CreatedDate.ToString("d")</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <h5 class="list-group-item-heading">Thành viên</h5>
-                <ol>
-                    @foreach (var member in Model.Members)
-                    {
-                        <li>@member.Name</li>
-                    }
-                </ol>
-            </a>
-        </div>
-
+    <div class="team-management">
         @if (Model.JoinRequests.Any())
         {
             <h4>Thành viên xin gia nhập</h4>
@@ -73,7 +84,8 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            TeamInfoController.init("#teamInfo");
+            TeamInfoController.init(".team-info");
+            TeamInfoController.init(".team-management");
         });
     </script>
 }

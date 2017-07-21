@@ -34,6 +34,10 @@ namespace TeamUp.Persistence.Repositories
             return await _context.Teams
                 .Include(t => t.Captain)
                 .Include(t => t.Members)
+                    .ThenInclude(m => m.Positions)
+                    .ThenInclude(p => p.Position)
+                .Include(t => t.Members)
+                    .ThenInclude(m => m.Avatar)
                 .Include(t => t.District)
                     .ThenInclude(d => d.City)
                 .SingleOrDefaultAsync(t => t.Id == id);

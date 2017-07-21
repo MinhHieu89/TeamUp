@@ -19,17 +19,22 @@
                         <span class="label label-primary label-md">@position</span>
                     }
                 </div>
-                <p>@Model.StrongFoot</p>
+                <div class="strongfoot">
+                    @if (Model.StrongFoot.HasValue)
+                    {
+                        <img src="/images/icons/@(Model.StrongFoot.Value ? "right-foot" : "left-foot").png" alt="none" />
+                    }
+                </div>
             </div>
         </div>
         <div class="member-info__detail">
             <table class="table">
                 <tr>
-                    <td>Địa chỉ</td>
+                    <th scope="row">Địa chỉ</th>
                     <td>@Model.GetLocation()</td>
                 </tr>
                 <tr>
-                    <td>Đội bóng</td>
+                    <th scope="row">Đội bóng</th>
                     @if (@Model.Team != null)
                     {
                         <td><a asp-controller="Teams" asp-action="Info" asp-route-id=@Model.Team.Id>@Model.Team.Name</a></td>
@@ -40,15 +45,15 @@
                     }
                 </tr>
                 <tr>
-                    <td>Tuổi</td>
+                    <th scope="row">Tuổi</th>
                     <td>@Model.Age</td>
                 </tr>
                 <tr>
-                    <td>Chiều cao</td>
+                    <th scope="row">Chiều cao</th>
                     <td>@Model.Height (cm)</td>
                 </tr>
                 <tr>
-                    <td>Số điện thoại</td>
+                    <th scope="row">Số điện thoại</th>
                     <td>@Model.Phone</td>
                 </tr>
             </table>

@@ -13,6 +13,7 @@ namespace TeamUp.Mapping
                 .ForMember(tv => tv.JoinRequests, opts => opts.Ignore())
                 .ForMember(tv => tv.District, opts => opts.MapFrom(t => t.District.Name))
                 .ForMember(tv => tv.City, opts => opts.MapFrom(t => t.District.City.Name));
+ 
             CreateMap<Team, TeamEditViewModel>()
                 .ForMember(tv => tv.InitialName, opts => opts.MapFrom(t => t.Name))
                 .ForMember(tv => tv.CityId, opts => opts.MapFrom(t => t.District.CityId));

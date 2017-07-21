@@ -1,17 +1,16 @@
 ﻿var TeamInfoController = function (teamService, requestService) {
 
-    var init, approveButton, rejectButton,
-        deleteTeam, leaveTeam, approveJoinRequest, rejectJoinRequest,
-        deleteSuccess, leaveSuccess, approveSuccess, rejectSuccess, fail, confirm;
+    var approveButton, rejectButton;
 
-    init = function (container) {
+    var init = function (container) {
         $(container).on("click", ".js-team-delete", deleteTeam);
         $(container).on("click", ".js-leave", leaveTeam);
         $(container).on("click", ".js-approve", approveJoinRequest);
         $(container).on("click", ".js-reject", rejectJoinRequest);
+        $(container).on("click", ".js-join", createJoinRequest);
     };
 
-    deleteTeam = function (e) {
+    var deleteTeam = function (e) {
         var teamId = $(e.target).attr("data-team-id");
         confirm("Bạn muốn giải thể đội bóng?",
             function () {
@@ -19,21 +18,21 @@
             });
     };
 
-    leaveTeam = function () {
+    var leaveTeam = function () {
         confirm("Bạn muốn rời khỏi đội?",
             function () {
                 requestService.leave(leaveSuccess, fail);
             });
     };
 
-    approveJoinRequest = function (e) {
+    var approveJoinRequest = function (e) {
         approveButton = $(e.target);
         var userId = approveButton.attr("data-user-id"),
             teamId = approveButton.attr("data-team-id");
         requestService.approve(userId, teamId, approveSuccess, fail);
     };
 
-    rejectJoinRequest = function (e) {
+    var rejectJoinRequest = function (e) {
         rejectButton = $(e.target);
         var userId = rejectButton.attr("data-user-id"),
             teamId = rejectButton.attr("data-team-id");
@@ -41,8 +40,14 @@
         requestService.reject(userId, teamId, rejectSuccess, fail);
     };
 
+    var createJoinRequest = function (e) {
+        button = $(e.target);
+        var teamId = button.attr("data-team-id");
 
-    confirm = function (title, callback) {
+        requestService.createJoinRequest(teamId, done, fail);
+    };
+
+    var confirm = function (title, callback) {
         swal({
             title: title,
             type: "warning",
@@ -58,7 +63,7 @@
         window.location.replace(url);
     };
 
-    deleteSuccess = function () {
+    var deleteSuccess = function () {
         swal({
             title: "Thành công",
             text: "Dữ liệu đội bóng đã bị xóa",
@@ -71,7 +76,7 @@
             });
     };
 
-    approveSuccess = function (username) {
+    var approveSuccess = function (username) {
         approveButton.parents("tr").fadeOut(300,
             function () {
                 $(this.remove());
@@ -79,7 +84,7 @@
         $(".list-group-item > ol").append("<li>" + username + "</li>");
     };
 
-    leaveSuccess = function () {
+    var leaveSuccess = function () {
         swal({
             title: "Thành công",
             text: "Bạn đã rời khỏi đội",
@@ -92,14 +97,18 @@
             });
     };
 
-    rejectSuccess = function () {
+    var rejectSuccess = function () {
         rejectButton.parents("tr").fadeOut(300,
             function () {
                 $(this.remove());
             });
     };
 
-    fail = function (err) {
+    var done = function () {
+        swal("Thành công!", "Yêu cầu đã được gửi", "success");
+    };
+
+    var fail = function (err) {
         swal(err.responseText, null, "error");
     };
 

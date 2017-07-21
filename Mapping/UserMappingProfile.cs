@@ -20,25 +20,17 @@ namespace TeamUp.Mapping
                     opts.MapFrom(u => u.Positions.Select(up => new PositionViewModel { Id = up.PositionId, Name = up.Position.Name, Selected = true })));
 
             CreateMap<ApplicationUser, MemberInfoViewModel>()
-                .ForMember(v => v.Avatar, opts => opts.MapFrom(u => u.Avatar == null ? "noAvatar.jpg" : u.Avatar.FileName))
+                .ForMember(v => v.Avatar,
+                    opts => opts.MapFrom(u => u.Avatar == null ? "noAvatar.jpg" : u.Avatar.FileName))
                 .ForMember(v => v.Team,
                     opts => opts.MapFrom(u => u.TeamId.HasValue
-                        ? new KeyValuePairViewModel { Id = u.TeamId.Value, Name = u.Team.Name }
+                        ? new KeyValuePairViewModel {Id = u.TeamId.Value, Name = u.Team.Name}
                         : null))
                 .ForMember(v => v.Age, opts => opts.MapFrom(u => u.Age.HasValue ? u.Age.Value.ToString() : ""))
                 .ForMember(v => v.City, opts => opts.MapFrom(u => u.District.City.Name))
                 .ForMember(v => v.District, opts => opts.MapFrom(u => u.District.Name))
-                .ForMember(v => v.Positions, opts => opts.MapFrom(u => u.Positions.Select(up => up.Position.Name)))
-                .ForMember(v => v.StrongFoot, opts => opts.Ignore())
-                .AfterMap((u, v) =>
-                {
-                    if (u.StrongFoot.HasValue)
-                        v.StrongFoot = u.StrongFoot.Value ? "Chân phải" : "Chân trái";
-                    else
-                        v.StrongFoot = "";
-                });
+                .ForMember(v => v.Positions, opts => opts.MapFrom(u => u.Positions.Select(up => up.Position.Name)));
 
-            // From Api/ViewModel to Domain
             CreateMap<MemberEditViewModel, ApplicationUser>()
                 .ForMember(u => u.Positions, opts => opts.Ignore())
                 .ForMember(u => u.Avatar, opts => opts.Ignore())

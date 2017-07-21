@@ -15,11 +15,11 @@ namespace TeamUp.Core.ViewModels
         public DateTime CreatedDate { get; set; }
         public IEnumerable<JoinRequestViewModel> JoinRequests { get; set; }
 
-        public ICollection<UserViewModel> Members { get; set; }
+        public ICollection<MemberInfoViewModel> Members { get; set; }
 
         public TeamInfoViewModel()
         {
-            Members = new Collection<UserViewModel>();
+            Members = new Collection<MemberInfoViewModel>();
         }
 
     }
