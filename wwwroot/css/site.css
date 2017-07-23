@@ -196,6 +196,16 @@ figcaption {
 	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
+.card:before,
+.card:after {
+	content: " ";
+	display: table;
+}
+
+.card:after {
+	clear: both;
+}
+
 /* site's css */
 .panel {
 	margin-top: 50px;

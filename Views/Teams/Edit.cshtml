@@ -3,22 +3,22 @@
 @{
     ViewData["Title"] = "Cập nhật thông tin";
 }
-<div class="card grouping">
+<div class="card">
     <form class="form-horizontal" asp-controller="Teams" asp-action="Edit" method="post">
         <h4>Cập nhật thông tin đội</h4>
         <hr />
         <input type="hidden" asp-for="@Model.Id" />
         <div class="form-group">
-            <label asp-for="Name" class="col-md-4 control-label"></label>
-            <div class="col-md-8">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
                 <input asp-for="Name" type="text" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
         </div>
         <input type="hidden" name="InitialName" value="@Model.InitialName" />
         <div class="form-group">
-            <label asp-for="CityId" class="col-md-4 control-label">Thành phố</label>
-            <div class="col-md-8">
+            <label asp-for="CityId" class="col-md-2 control-label">Thành phố</label>
+            <div class="col-md-10">
                 <select asp-for="CityId" asp-items="@Model.Cities" class="form-control">
                     <option value="">Chọn thành phố của bạn</option>
                 </select>
@@ -26,8 +26,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="DistrictId" class="col-md-4 control-label"></label>
-            <div class="col-md-8">
+            <label asp-for="DistrictId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
                 <select asp-for="DistrictId" asp-items="@Model.Districts" class="form-control">
                     <option value="">Chọn quận của bạn</option>
                 </select>
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-4 col-md-8">
+            <div class="col-md-offset-2 col-md-10">
                 <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                 <a asp-controller="Teams" asp-action="Info" asp-route-id="@Model.Id" class="btn btn-default">Quay lại</a>
             </div>
