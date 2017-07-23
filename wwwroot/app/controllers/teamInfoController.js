@@ -27,24 +27,22 @@
 
     var approveJoinRequest = function (e) {
         approveButton = $(e.target);
-        var userId = approveButton.attr("data-user-id"),
-            teamId = approveButton.attr("data-team-id");
-        requestService.approve(userId, teamId, approveSuccess, fail);
+        var requestId = approveButton.attr("data-request-id");
+        requestService.accept(requestId, approveSuccess, fail);
     };
 
     var rejectJoinRequest = function (e) {
         rejectButton = $(e.target);
-        var userId = rejectButton.attr("data-user-id"),
-            teamId = rejectButton.attr("data-team-id");
+        var requestId = rejectButton.attr("data-request-id");
 
-        requestService.reject(userId, teamId, rejectSuccess, fail);
+        requestService.reject(requestId, rejectSuccess, fail);
     };
 
     var createJoinRequest = function (e) {
         button = $(e.target);
         var teamId = button.attr("data-team-id");
 
-        requestService.createJoinRequest(teamId, done, fail);
+        requestService.join(teamId, done, fail);
     };
 
     var confirm = function (title, callback) {
@@ -116,4 +114,4 @@
         init: init
     };
 
-}(TeamService, RequestService);
+}(TeamService, MemberRequestService);

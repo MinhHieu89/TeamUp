@@ -5,6 +5,7 @@ namespace TeamUp.Core.Services
 {
     public interface IMemberService
     {
-        Task LeaveCurrentTeam(ApplicationUser user);
+        Task LeaveTeam(string userId);
+        Task<ApplicationUser> GetUserById(string id);
     }
 }

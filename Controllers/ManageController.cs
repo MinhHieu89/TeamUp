@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using TeamUp.Core.Models;
+using TeamUp.Core.Services;
 using TeamUp.Core.ViewModels;
-using TeamUp.Services;
 
 namespace TeamUp.Controllers
 {

@@ -68,9 +68,10 @@
     <table id="join-requests" class="table">
         <thead>
         <tr>
-            <th>Ngày</th>
-            <th>Đội bóng</th>
-            <th>Trạng thái</th>
+            <th>Ngày Tạo</th>
+            <th>Ngày Phản Hồi</th>
+            <th>Đội Bóng</th>
+            <th>Trạng Thái</th>
             <th></th>
         </tr>
         </thead>
@@ -78,13 +79,14 @@
         @foreach (var request in Model.JoinRequests)
         {
             <tr>
-                <td>@request.CreatedTime.ToString("dd/MM/yyyy")</td>
-                <td>@request.TeamName</td>
+                <td>@request.CreatedTime</td>
+                <td>@request.UpdatedTime</td>
+                <td><a asp-controller="Teams" asp-action="Info" asp-route-id="@request.TeamId">@request.TeamName</a></td>
                 <td>@request.Status</td>
                 <td>
                     @if (request.Status == RequestStatus.Pending)
                     {
-                        <button class="btn btn-sm btn-primary js-cancel" data-team-id="@request.TeamId">Hủy bỏ</button>
+                        <button class="btn btn-sm btn-primary js-cancel" data-request-id="@request.Id">Hủy bỏ</button>
                     }
                 </td>
             </tr>

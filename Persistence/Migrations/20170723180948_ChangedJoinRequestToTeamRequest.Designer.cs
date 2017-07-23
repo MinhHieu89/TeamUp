@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using TeamUp.Persistence;
-using TeamUp.Core.Models;
 using TeamUp.Core.Enums;
 
 namespace TeamUp.Persistence.Migrations
 {
     [DbContext(typeof(TeamUpDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170723180948_ChangedJoinRequestToTeamRequest")]
+    partial class ChangedJoinRequestToTeamRequest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -306,7 +306,9 @@ namespace TeamUp.Persistence.Migrations
 
                     b.Property<DateTime>("CreatedTime");
 
-                    b.Property<int>("RequestType");
+                    b.Property<string>("RequestType")
+                        .IsRequired()
+                        .HasMaxLength(10);
 
                     b.Property<int>("Status");
 

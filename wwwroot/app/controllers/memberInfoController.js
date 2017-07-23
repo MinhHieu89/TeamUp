@@ -7,11 +7,11 @@
 
     var cancelJoinRequest = function(e) {
         button = $(e.target);
-        var teamId = button.attr("data-team-id");
+        var requestId = button.attr("data-request-id");
 
         confirm("Bạn chắc chắn muốn hủy yêu cầu chứ?",
             function() {
-                requestService.cancel(teamId, done, fail);
+                requestService.cancel(requestId, done, fail);
             });
     };
 
@@ -48,4 +48,4 @@
         init: init
     };
 
-}(RequestService);
+}(MemberRequestService);

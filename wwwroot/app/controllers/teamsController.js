@@ -11,7 +11,7 @@
         button = $(e.target);
         var teamId = button.attr("data-team-id");
 
-        requestService.createJoinRequest(teamId, done, fail);
+        requestService.join(teamId, done, fail);
     };
 
     done = function () {
@@ -25,4 +25,4 @@
     return {
         init: init
     };
-}(RequestService);
+}(MemberRequestService);

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using TeamUp.Core.Models;
 
 namespace TeamUp.Core.Services
@@ -8,33 +7,34 @@ namespace TeamUp.Core.Services
     public class MemberService : IMemberService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public MemberService(
-            IUnitOfWork unitOfWork, 
-            UserManager<ApplicationUser> userManager)
+        public MemberService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _userManager = userManager;
         }
 
-        public async Task LeaveCurrentTeam(ApplicationUser user)
+        public async Task LeaveTeam(string userId)
         {
+            var user = await GetUserById(userId);
+            user.LeaveTeam();
+
             var members = user.Team.Members;
-            user.LeaveCurrentTeam();
             if (members.Count <= 1)
             {
                 _unitOfWork.Teams.Delete(user.Team);
             }
             else if (user.Team.CaptainId == user.Id)
             {
-
                 var other = members.FirstOrDefault(m => m.Id != user.Id);
                 user.Team.CaptainId = other.Id;
             }
 
             await _unitOfWork.CompleteAsync();
         }
-        
+
+        public async Task<ApplicationUser> GetUserById(string userId)
+        {
+            return await _unitOfWork.Users.GetUserById(userId);
+        }
     }
 }

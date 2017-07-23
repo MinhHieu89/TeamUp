@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TeamUp.Controllers;
 using TeamUp.Core;
 using TeamUp.Core.Models;
 using TeamUp.Core.Repositories;
 using TeamUp.Core.Services;
 using TeamUp.Persistence;
 using TeamUp.Persistence.Repositories;
-using TeamUp.Services;
 
 namespace TeamUp
 {
@@ -50,6 +50,7 @@ namespace TeamUp
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IPhotoService, PhotoService>();
             services.AddTransient<IPhotoStorage, FileSystemPhotoStorage>();
+            services.AddTransient<ITeamRequestService, TeamRequestService>();
 
             // Register Services
             services.AddTransient<IMemberService, MemberService>();

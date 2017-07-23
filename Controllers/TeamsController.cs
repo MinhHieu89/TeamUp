@@ -84,8 +84,8 @@ namespace TeamUp.Controllers
         {
             var team = await _unitOfWork.Teams.GetTeam(id);
             var viewModel = _mapper.Map<Team, TeamInfoViewModel>(team);
-            var requests = await _unitOfWork.JoinRequests.GetTeamRequestsAsync(id);
-            viewModel.JoinRequests = _mapper.Map<IEnumerable<JoinRequest>, IEnumerable<JoinRequestViewModel>>(requests);
+            var requests = await _unitOfWork.TeamRequests.GetAllPendingRequestsForTeam(id);
+            viewModel.JoinRequests = _mapper.Map<IEnumerable<TeamRequest>, IEnumerable<JoinRequestViewModel>>(requests);
 
             return View(viewModel);
         }

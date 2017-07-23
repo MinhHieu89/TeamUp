@@ -27,12 +27,12 @@ namespace TeamUp.Core.Models
 
         public ICollection<ApplicationUser> Members { get; }
 
-        public ICollection<JoinRequest> JoinRequests { get; }
+        public ICollection<TeamRequest> JoinRequests { get; }
 
         private Team()
         {
             Members = new Collection<ApplicationUser>();
-            JoinRequests = new Collection<JoinRequest>();
+            JoinRequests = new Collection<TeamRequest>();
         }
 
         public Team(ApplicationUser user) : this()

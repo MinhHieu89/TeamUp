@@ -18,7 +18,7 @@ namespace TeamUp.Core.Models
         public District District { get; set; }
 
         public ICollection<UserPosition> Positions { get; set; }
-        public ICollection<JoinRequest> JoinRequests { get; set; }
+        public ICollection<TeamRequest> JoinRequests { get; set; }
 
         public int? TeamId { get; set; }
         public Team Team { get; set; }
@@ -47,7 +47,7 @@ namespace TeamUp.Core.Models
         public ApplicationUser()
         {
             Positions = new Collection<UserPosition>();
-            JoinRequests = new Collection<JoinRequest>();
+            JoinRequests = new Collection<TeamRequest>();
         }
 
         public void JoinTeam(int teamId)
@@ -55,9 +55,14 @@ namespace TeamUp.Core.Models
             TeamId = teamId;
         }
 
-        public void LeaveCurrentTeam()
+        public void LeaveTeam()
         {
             TeamId = null;
+        }
+
+        public bool HasATeam()
+        {
+            return TeamId.HasValue;
         }
     }
 }

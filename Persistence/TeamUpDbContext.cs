@@ -10,7 +10,7 @@ namespace TeamUp.Persistence
         public DbSet<Team> Teams { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<District> Districts { get; set; }
-        public DbSet<JoinRequest> JoinRequests { get; set; }
+        public DbSet<TeamRequest> Requests { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<UserPosition> UserPositions { get; set; }
         public DbSet<Photo> Photos { get; set; }
@@ -47,10 +47,6 @@ namespace TeamUp.Persistence
                 .HasOne(u => u.District)
                 .WithMany(d => d.Users)
                 .OnDelete(DeleteBehavior.Restrict);
-
-
-            builder.Entity<JoinRequest>()
-                .HasKey(jr => new {jr.UserId, jr.TeamId, jr.CreatedTime});
 
             builder.Entity<UserPosition>()
                 .HasKey(up => new {up.UserId, up.PositionId});
