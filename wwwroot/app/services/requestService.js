@@ -1,37 +1,44 @@
-﻿var MemberRequestService = function() {
+﻿var RequestService = function() {
 
     var join = function(teamId, done, fail) {
-        $.post("/memberRequest/join", { TeamId: teamId })
+        $.post("/request/join", { TeamId: teamId })
+            .done(done)
+            .fail(fail);
+    };
+
+    var invite = function (userId, done, fail) {
+        $.post("/request/invite", { UserId: userId })
             .done(done)
             .fail(fail);
     };
 
     var accept = function(requestId, done, fail) {
-        $.post("/memberRequest/accept", { RequestId: requestId })
+        $.post("/request/accept", { RequestId: requestId })
             .done(done)
             .fail(fail);
     };
 
     var reject = function (requestId, done, fail) {
-        $.post("/memberRequest/reject", { RequestId: requestId })
+        $.post("/request/reject", { RequestId: requestId })
             .done(done)
             .fail(fail);
     };
 
     var cancel = function (requestId, done, fail) {
-        $.post("/memberRequest/cancel", { RequestId: requestId })
+        $.post("/request/cancel", { RequestId: requestId })
             .done(done)
             .fail(fail);
     };
 
     var leave = function (done, fail) {
-        $.post("/memberRequest/leave")
+        $.post("/request/leave")
             .done(done)
             .fail(fail);
     };
 
     return {
         join: join,
+        invite: invite,
         accept: accept,
         reject: reject,
         cancel: cancel,

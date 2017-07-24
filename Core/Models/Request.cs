@@ -4,7 +4,7 @@ using TeamUp.Core.Enums;
 
 namespace TeamUp.Core.Models
 {
-    public class TeamRequest
+    public class Request
     {
         public int Id { get; set; }
 
@@ -18,23 +18,23 @@ namespace TeamUp.Core.Models
         public RequestStatus Status { get; private set; }
 
         [Required]
-        public RequestType RequestType { get; private set; }
+        public RequestType Type { get; private set; }
 
         public DateTime CreatedTime { get; private set; }
         public DateTime UpdatedTime { get; private set; }
 
-        private TeamRequest()
+        private Request()
         {
             CreatedTime = DateTime.Now;
             UpdatedTime = CreatedTime;
             Status = RequestStatus.Pending;
         }
 
-        public TeamRequest(string userId, int teamId, RequestType requestType) : this()
+        public Request(string userId, int teamId, RequestType type) : this()
         {
             UserId = userId;
             TeamId = teamId;
-            RequestType = requestType;
+            Type = type;
         }
 
         public void SetStatus(RequestStatus status)

@@ -1,0 +1,91 @@
+﻿@using System.Linq
+@model MembersRequestsViewModel
+
+<div class="card">
+    <h4>Danh sách yêu cầu đã gửi</h4>
+    <hr />
+    <table id="requests" class="table">
+        <thead>
+        <tr>
+            <th>Đội Bóng</th>
+            <th>Ngày Gửi</th>
+            <th>Cập Nhật</th>
+            <th>Trạng Thái</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Requests.Any())
+        {
+            <tr><td colspan="5">Không có yêu cầu</td></tr>
+        }
+        else
+        {
+            foreach (var request in Model.Requests)
+            {
+                <tr>
+                    <td><a asp-controller="Teams" asp-action="Info" asp-route-id="@request.TeamId">@request.TeamName</a></td>
+                    <td>@request.CreatedTime</td>
+                    <td>@request.UpdatedTime</td>
+                    <td>@request.Status</td>
+                    <td>
+                        @if (request.Status == RequestStatus.Pending)
+                        {
+                            <button class="btn btn-sm btn-primary js-cancel" data-request-id="@request.Id">Hủy bỏ</button>
+                        }
+                    </td>
+                </tr>
+            }
+
+        }
+        </tbody>
+    </table>
+</div>
+<div class="card">
+    <h4>Danh sách lời mời</h4>
+    <hr />
+    <table id="invitations" class="table">
+        <thead>
+        <tr>
+            <th>Đội Bóng</th>
+            <th>Ngày Gửi</th>
+            <th>Cập Nhật</th>
+            <th>Trạng Thái</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Invitations.Any())
+        {
+            <tr><td colspan="5">Không có lời mời</td></tr>
+        }
+        else
+        {
+            foreach (var invitation in Model.Invitations)
+             {
+                 <tr>
+                     <td><a asp-controller="Teams" asp-action="Info" asp-route-id="@invitation.TeamId">@invitation.TeamName</a></td>
+                     <td>@invitation.CreatedTime</td>
+                     <td>@invitation.UpdatedTime</td>
+                     <td>@invitation.Status</td>
+                     <td>
+                         @if (invitation.Status == RequestStatus.Pending)
+                         {
+                             <button class="btn btn-sm btn-primary js-approve" data-request-id="@invitation.Id">Đồng ý</button>
+                             <button class="btn btn-sm btn-danger js-reject" data-request-id="@invitation.Id">Từ chối</button>
+                         }
+                     </td>
+                 </tr>
+             }
+            
+        }
+        </tbody>
+    </table>
+</div>
+@section Scripts{
+    <script>
+        $(function() {
+            RequestsController.init("#requests, #invitations");
+        });
+    </script>
+}

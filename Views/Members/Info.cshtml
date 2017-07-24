@@ -1,7 +1,6 @@
-﻿@using TeamUp.Core.Enums
-@model MemberInfoViewModel
+﻿@model MemberInfoViewModel
 
-<div class="card grouping">
+<div class="card">
     <h4>Thông tin</h4>
     <hr/>
     <div id="member-info">
@@ -57,47 +56,15 @@
                     <td>@Model.Phone</td>
                 </tr>
             </table>
-            <button class="btn btn-primary">Mời vào đội</button>
+            <button class="btn btn-primary js-invite" data-user-id="@Model.Id">Mời vào đội</button>
             <a asp-controller="Members" asp-action="Edit" class="btn btn-primary">Sửa thông tin</a>
         </div>
     </div>
 </div>
-<div class="card grouping">
-    <h4>Yêu cầu gia nhập</h4>
-    <hr />
-    <table id="join-requests" class="table">
-        <thead>
-        <tr>
-            <th>Ngày Tạo</th>
-            <th>Ngày Phản Hồi</th>
-            <th>Đội Bóng</th>
-            <th>Trạng Thái</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var request in Model.JoinRequests)
-        {
-            <tr>
-                <td>@request.CreatedTime</td>
-                <td>@request.UpdatedTime</td>
-                <td><a asp-controller="Teams" asp-action="Info" asp-route-id="@request.TeamId">@request.TeamName</a></td>
-                <td>@request.Status</td>
-                <td>
-                    @if (request.Status == RequestStatus.Pending)
-                    {
-                        <button class="btn btn-sm btn-primary js-cancel" data-request-id="@request.Id">Hủy bỏ</button>
-                    }
-                </td>
-            </tr>
-        }
-        </tbody>
-        </table>
-</div>
 @section Scripts {
     <script>
         $(function() {
-            MemberInfoController.init("#join-requests");
+            MemberInfoController.init("#member-info");
         });
     </script>
 }

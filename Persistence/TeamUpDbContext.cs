@@ -10,7 +10,7 @@ namespace TeamUp.Persistence
         public DbSet<Team> Teams { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<District> Districts { get; set; }
-        public DbSet<TeamRequest> Requests { get; set; }
+        public DbSet<Request> Requests { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<UserPosition> UserPositions { get; set; }
         public DbSet<Photo> Photos { get; set; }

@@ -14,7 +14,7 @@ namespace TeamUp.Persistence
         public IUserRepository Users { get; private set; }
         public ITeamRepository Teams { get; private set; }
         public ILocationRepository Locations { get; private set; }
-        public ITeamRequestRepository TeamRequests { get; private set; }
+        public IRequestRepository Requests { get; private set; }
 
         public UnitOfWork(TeamUpDbContext context)
         {
@@ -23,7 +23,7 @@ namespace TeamUp.Persistence
             Users = new UserRepository(context);
             Teams = new TeamRepository(context);
             Locations = new LocationRepository(context);
-            TeamRequests = new TeamRequestRepository(context);
+            Requests = new RequestRepository(context);
             _context = context;
         }
 

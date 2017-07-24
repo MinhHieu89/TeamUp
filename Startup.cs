@@ -50,7 +50,7 @@ namespace TeamUp
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IPhotoService, PhotoService>();
             services.AddTransient<IPhotoStorage, FileSystemPhotoStorage>();
-            services.AddTransient<ITeamRequestService, TeamRequestService>();
+            services.AddTransient<IRequestService, RequestService>();
 
             // Register Services
             services.AddTransient<IMemberService, MemberService>();

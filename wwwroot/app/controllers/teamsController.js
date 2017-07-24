@@ -25,4 +25,4 @@
     return {
         init: init
     };
-}(MemberRequestService);
+}(RequestService);

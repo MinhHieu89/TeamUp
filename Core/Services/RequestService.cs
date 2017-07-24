@@ -4,28 +4,28 @@ using TeamUp.Core.Models;
 
 namespace TeamUp.Core.Services
 {
-    public class TeamRequestService : ITeamRequestService
+    public class RequestService : IRequestService
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public TeamRequestService(IUnitOfWork unitOfWork)
+        public RequestService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         public async Task Create(string userId, int teamId, RequestType requestType)
         {
-            var newRequest = new TeamRequest(userId, teamId, requestType);
-            await _unitOfWork.TeamRequests.Add(newRequest);
+            var newRequest = new Request(userId, teamId, requestType);
+            await _unitOfWork.Requests.Add(newRequest);
             await _unitOfWork.CompleteAsync();
         }
 
-        public async Task Accept(TeamRequest request)
+        public async Task Accept(Request request)
         {
 
-            if (request.RequestType == RequestType.FromMember)
+            if (request.Type == RequestType.FromMember)
             {
-                var pendingRequests = await _unitOfWork.TeamRequests.GetRequestsFromUser(request.UserId, RequestStatus.Pending);
+                var pendingRequests = await _unitOfWork.Requests.GetRequestsFromUser(request.UserId, RequestStatus.Pending);
                 foreach (var req in pendingRequests)
                     req.SetStatus(RequestStatus.Canceled);
             }
@@ -38,26 +38,16 @@ namespace TeamUp.Core.Services
             await _unitOfWork.CompleteAsync();
         }
 
-        public async Task Reject(TeamRequest request)
+        public async Task Reject(Request request)
         {
             request.SetStatus(RequestStatus.Rejected);
             await _unitOfWork.CompleteAsync();
         }
 
-        public async Task Cancel(TeamRequest request)
+        public async Task Cancel(Request request)
         {
             request.SetStatus(RequestStatus.Canceled);
             await _unitOfWork.CompleteAsync();
-        }
-
-        public async Task<TeamRequest> GetPendingRequest(string userId, int teamId)
-        {
-            return await _unitOfWork.TeamRequests.GetPendingRequest(userId, teamId);
-        }
-
-        public async Task<TeamRequest> GetRequestById(int id)
-        {
-            return await _unitOfWork.TeamRequests.GetRequestById(id);
         }
     }
 }

@@ -55,43 +55,10 @@
 
 <div class="card grouping">
     <div class="team-management">
-        
-            <h4>Thành viên xin gia nhập</h4>
-            <table class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th>Ngày Gửi</th>
-                        <th>Người Gửi</th>
-                        <th>Trạng Thái</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                @if (!Model.JoinRequests.Any())
-                {
-                    <tr ><td colspan="4">Không có yêu cầu</td></tr>
-                }
-                else
-                {
-                    foreach (var request in @Model.JoinRequests)
-                     {
-                         <tr>
-                             <td>@request.CreatedTime</td>
-                             <td><a asp-controller="Members" asp-action="Info" asp-route-id="@request.UserId">@request.UserName</a></td>
-                             <td>@request.Status</td>
-                             <td>
-                                 <button class="btn btn-sm btn-primary js-approve" data-request-id="@request.Id">Đồng ý</button>
-                                 <button class="btn btn-sm btn-danger js-reject" data-request-id="@request.Id">Từ chối</button>
-                             </td>
-                         </tr>
-                     }
-                }
-                </tbody>
-            </table>
         <a asp-controller="Teams" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Chỉnh sửa</a>
+        <a asp-controller="Teams" asp-action="Requests" asp-route-id="@Model.Id" class="btn btn-primary">Yêu cầu</a>
         <button data-team-id="@Model.Id" class="btn btn-danger js-team-delete">Xóa</button>
         <button class="btn btn-info js-leave">Rời đội</button>
-        <a asp-controller="Teams" asp-action="Index" class="btn btn-default">Quay lại</a>
     </div>
 </div>
 

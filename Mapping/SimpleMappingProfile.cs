@@ -13,7 +13,7 @@ namespace TeamUp.Mapping
             CreateMap<City, CityDto>();
             CreateMap<District, DistrictDto>();
             CreateMap<Position, PositionViewModel>();
-            CreateMap<TeamRequest, JoinRequestViewModel>()
+            CreateMap<Request, JoinRequestViewModel>()
                 .ForMember(v => v.UserName, opts => opts.MapFrom(r => r.User.Name))
                 .ForMember(v => v.TeamName, opts => opts.MapFrom(r => r.Team.Name))
                 .ForMember(v => v.CreatedTime, opts => opts.MapFrom(r => r.CreatedTime.ToString("HH:mm tt - dd/MM/yyyy")))

@@ -10,7 +10,7 @@ namespace TeamUp.Core
         IUserRepository Users { get; }
         ITeamRepository Teams { get; }
         ILocationRepository Locations { get; }
-        ITeamRequestRepository TeamRequests { get; }
+        IRequestRepository Requests { get; }
         Task CompleteAsync();
     }
 }

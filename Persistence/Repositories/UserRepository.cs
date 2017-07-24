@@ -42,8 +42,6 @@ namespace TeamUp.Persistence.Repositories
                     .ThenInclude(d => d.City)
                 .Include(u => u.Positions)
                     .ThenInclude(up => up.Position)
-                .Include(u => u.JoinRequests)
-                    .ThenInclude(r => r.Team)
                 .SingleOrDefaultAsync(u => u.Id == id);
         }
     }

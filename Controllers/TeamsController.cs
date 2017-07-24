@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TeamUp.Core;
+using TeamUp.Core.Enums;
 using TeamUp.Core.Models;
 using TeamUp.Core.ViewModels;
 
@@ -84,8 +86,26 @@ namespace TeamUp.Controllers
         {
             var team = await _unitOfWork.Teams.GetTeam(id);
             var viewModel = _mapper.Map<Team, TeamInfoViewModel>(team);
-            var requests = await _unitOfWork.TeamRequests.GetAllPendingRequestsForTeam(id);
-            viewModel.JoinRequests = _mapper.Map<IEnumerable<TeamRequest>, IEnumerable<JoinRequestViewModel>>(requests);
+            var requests = await _unitOfWork.Requests.GetAllPendingRequestsForTeam(id);
+            viewModel.JoinRequests = _mapper.Map<IEnumerable<Request>, IEnumerable<JoinRequestViewModel>>(requests);
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Requests(int id)
+        {
+            var teamRequests = await _unitOfWork.Requests.GetAllRequestsForTeam(id);
+            var requests = teamRequests
+                .Where(r => r.Type == RequestType.FromMember && r.Status == RequestStatus.Pending);
+            var invitations = teamRequests
+                .Where(r => r.Type == RequestType.FromTeam);
+
+            var viewModel = new MembersRequestsViewModel
+            {
+                Requests = _mapper.Map<IEnumerable<Request>, IEnumerable<JoinRequestViewModel>>(requests),
+                Invitations = _mapper.Map<IEnumerable<Request>, IEnumerable<JoinRequestViewModel>>(invitations)
+            };
 
             return View(viewModel);
         }

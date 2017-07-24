@@ -15,7 +15,6 @@ namespace TeamUp.Core.ViewModels
         public string Age { get; set; }
         public string Height { get; set; }
         public string Phone { get; set; }
-        public IEnumerable<JoinRequestViewModel> JoinRequests { get; set; }
 
         public string GetLocation()
         {

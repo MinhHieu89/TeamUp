@@ -10,9 +10,10 @@ using TeamUp.Core.Models;
 namespace TeamUp.Persistence.Migrations
 {
     [DbContext(typeof(TeamUpDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170724024114_ChangeColumnNameOfRequestsTableFromRequestTypeToType")]
+    partial class ChangeColumnNameOfRequestsTableFromRequestTypeToType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

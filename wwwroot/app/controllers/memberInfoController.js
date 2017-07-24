@@ -1,31 +1,19 @@
 ﻿var MemberInfoController = function(requestService) {
-    var button;
 
     var init = function (container) {
-        $(container).on("click", ".js-cancel", cancelJoinRequest);
+        $(container).on("click", ".js-invite", invite);
     };
 
-    var cancelJoinRequest = function(e) {
-        button = $(e.target);
-        var requestId = button.attr("data-request-id");
-
-        confirm("Bạn chắc chắn muốn hủy yêu cầu chứ?",
+    var invite = function(e) {
+        var userId = $(e.target).attr("data-user-id");
+        confirm("Mời vào đội?",
             function() {
-                requestService.cancel(requestId, done, fail);
+                requestService.invite(userId, inviteSuccess, fail);
             });
     };
 
-    var done = function() {
-        swal({
-                title: "Thành công",
-                text: "Yêu cầu đã được hủy",
-                type: "success",
-                showConfirmButton: true
-            },
-            function () {
-                button.parent().prev()[0].innerText = "Canceled";
-                button.remove();
-            });
+    var inviteSuccess = function() {
+        swal("Thành công", "Yêu cầu đã được gửi đi", "success");
     };
 
     fail = function (err) {
@@ -48,4 +36,4 @@
         init: init
     };
 
-}(MemberRequestService);
+}(RequestService);

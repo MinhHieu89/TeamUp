@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TeamUp.Core;
+using TeamUp.Core.Enums;
 using TeamUp.Core.Models;
 using TeamUp.Core.ViewModels;
 
@@ -14,7 +16,6 @@ namespace TeamUp.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
-
 
         public MembersController(
             IUnitOfWork unitOfWork,
@@ -67,6 +68,23 @@ namespace TeamUp.Controllers
             _mapper.Map(viewModel, user);
             await _unitOfWork.CompleteAsync();
             return RedirectToAction("Info", new { id = user.Id });
+        }
+
+        public async Task<IActionResult> Requests()
+        {
+            var userRequests = await _unitOfWork.Requests.GetAllRequestsForUser(_userManager.GetUserId(HttpContext.User));
+            var requests = userRequests
+                .Where(r => r.Type == RequestType.FromMember);
+            var invitations = userRequests
+                .Where(r => r.Type == RequestType.FromTeam && r.Status == RequestStatus.Pending);
+
+            var viewModel = new MembersRequestsViewModel
+            {
+                Requests = _mapper.Map<IEnumerable<Request>, IEnumerable<JoinRequestViewModel>>(requests),
+                Invitations = _mapper.Map<IEnumerable<Request>, IEnumerable<JoinRequestViewModel>>(invitations)
+            };
+
+            return View(viewModel);
         }
 
         private async Task<ApplicationUser> GetCurrentUser()
